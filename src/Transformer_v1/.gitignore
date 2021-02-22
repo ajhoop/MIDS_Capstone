@@ -1,0 +1,8 @@
+__pycache__
+Create_data.ipynb  
+PrepData.ipynb
+wandb/*
+HS_extract/*.pkl
+HS_extract/*.json
+HS_extract/*.csv
+
