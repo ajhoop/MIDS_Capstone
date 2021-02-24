@@ -12,15 +12,9 @@ from sklearn.metrics import accuracy_score
 print("Using configuration file : config.json")
 config = json.loads(re.sub(r'#.*?\n', '', open('config.json', 'r').read()))
 
-df_train = pd.read_csv(config['train_csv'], dtype={'label': str, 'text' : str, 'Index' : int})
 df_val   = pd.read_csv(config['test_csv'], dtype={'label': str, 'text' : str, 'Index' : int})
 
-emb_array = pickle.load(open(config['trained_embeddings'], "rb" ))
-df_train['embedding'] = list(emb_array)
-
-predict = TransformerModel.Predict(df_train=df_train)
-
-predict.process_centroids()
+predict = TransformerModel.Predict()
 predict.setup_dataloader(df_val)
 
 #df_val['pred_label'], df_val['cos_sim'] = predict.do_inference()

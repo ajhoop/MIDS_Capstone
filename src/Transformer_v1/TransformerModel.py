@@ -218,6 +218,7 @@ class Misc():
     
     def get_embedding(self, df):
         ds = self.dataloader(df)
+        embeddings = []
         
         accumulate = []
         for i, g in enumerate(tqdm(ds)):
@@ -229,7 +230,25 @@ class Misc():
             #IPython.embed(); exit(1)
             output_vector = x.detach()
             accumulate.append(output_vector)
-        return torch.cat(accumulate).to('cpu')
+        #embeddings = torch.cat(accumulate).to('cpu')
+        df['embedding'] = list(torch.cat(accumulate).to('cpu'))
+        self.process_centroids(df)
+
+
+    def process_centroids(self, df_train):
+        # Group the embeddings together for getting centroids.
+        df_train_summed = df_train.groupby('label').apply(lambda x: x['embedding'].values).to_frame()
+
+        # Get the mean of the points for getting centroids.
+        def create_dict(r):
+            return np.concatenate([[np.array(i)] for i in r]).mean(axis=0)
+
+        # Get the list of centroids and list of labels (names) in df_final and df_index.
+        df_final = np.concatenate([[create_dict(row[0])] for index, row in df_train_summed.iterrows()])
+        df_index = [index for index, row in df_train_summed.iterrows()]
+        trained_embeddings = { 'df_final' : df_final, 'df_index' : df_index}
+        print('Saving trained embeddings : ', self.config['trained_embeddings'])
+        with open(self.config['trained_embeddings'], 'wb') as f: pickle.dump(trained_embeddings, f)
 
 # ------  The predict class. For classification, each datapoint need 
 # to be compared against each centroid. Better do this operation 
@@ -238,7 +257,6 @@ class Misc():
 class Predict():
 
     def __init__(self, 
-                 df_train   = None, 
                  batch_size = 1024, 
                  ) :
 
@@ -265,71 +283,34 @@ class Predict():
         self.embedding_dim   = int(config['embedding_dim'])
         self.padding_length  = int(config['padding_length'])
 
-        self.df_train        = df_train
+        #self.df_train        = df_train
         self.max_length      = int(config['padding_length'])
         self.tokenizer       = Tokenizer.from_file(config['token_config'])
         self.batch_size      = batch_size
 
         self.predict_group_size = int(config['predict_group_size'])
 
+
+        trained_embeddings = pickle.load(open(config['trained_embeddings'], "rb" ))
+        self.df_final = trained_embeddings['df_final']
+        self.df_index = trained_embeddings['df_index']
+
         # Basic pytorch similarity function
         self.cos     = torch.nn.CosineSimilarity(dim=1)
         self.softmax = torch.nn.Softmax(dim=1)
 
-    def process_centroids(self):
-        # Group the embeddings together for getting centroids.
-        df_train_summed = self.df_train.groupby('label').apply(lambda x: x['embedding'].values).to_frame()
-
-        # Get the mean of the points for getting centroids.
-        def create_dict(r):
-            return np.concatenate([[np.array(i)] for i in r]).mean(axis=0)
-
-        # Get the list of centroids and list of labels (names) in df_final and df_index.
-        self.df_final = np.concatenate([[create_dict(row[0])] for index, row in df_train_summed.iterrows()])
-        self.df_index = [index for index, row in df_train_summed.iterrows()]
+#    def process_centroids(self):
+#        # Group the embeddings together for getting centroids.
+#        df_train_summed = self.df_train.groupby('label').apply(lambda x: x['embedding'].values).to_frame()
+#
+#        # Get the mean of the points for getting centroids.
+#        def create_dict(r):
+#            return np.concatenate([[np.array(i)] for i in r]).mean(axis=0)
+#
+#        # Get the list of centroids and list of labels (names) in df_final and df_index.
+#        self.df_final = np.concatenate([[create_dict(row[0])] for index, row in df_train_summed.iterrows()])
+#        self.df_index = [index for index, row in df_train_summed.iterrows()]
  
-#    def prepare_data(self, df):
-#        class Dataset(torch.utils.data.Dataset):
-#
-#              def __init__(self, tokenizer, training_data, padding_length):
-#                    self.tokenizer      = tokenizer
-#                    self.training_data  = training_data
-#                    self.padding_length = padding_length
-#    
-#              def __len__(self):
-#                    return len(self.training_data)
-# 
-#              def __getitem__(self, index):
-#                    enc = self.tokenizer.encode(self.training_data[index])
-#                    return  { 
-#                             'ids'            : torch.Tensor(enc.ids[:self.padding_length]).to(torch.int64), 
-#                             'attention_mask' : (torch.from_numpy(np.array(enc.attention_mask)[:self.padding_length]) == 0),
-#                    }
-#
-#        return Dataset(self.tokenizer, df, self.max_length)
-#
-#    
-#    def dataloader(self, df):
-#        return torch.utils.data.DataLoader(
-#                self.prepare_data(df),
-#                batch_size=self.batch_size,
-#                num_workers=self.num_workers,
-#                pin_memory=True,
-#               )
-    
-    # FIXME
-#    def get_embedding(self, df):
-#        ds = self.dataloader(df)
-#        accumulate = []
-#        for i, k in enumerate(tqdm(ds)):
-#            input_ids = k['ids']
-#            input_ids = input_ids.to(self.device)
-#            x = self.model(input_ids)
-#            output_vector = torch.squeeze(x.permute(1, 0, 2).reshape(x.size(1), 1, -1), 1)
-#            output_vector = output_vector.detach()
-#            accumulate.append(output_vector)
-#        #return torch.cat(accumulate).to('cpu')
-#        return torch.cat(accumulate)
     def move_to(self, obj, device) :
         if torch.is_tensor(obj):
           return obj.to(device)
@@ -357,8 +338,12 @@ class Predict():
 
         outputs = []
         for i in range(self.predict_group_size) :
+           #IPython.embed(); exit(1)
       
-           action_ind = torch.nonzero((group_comb['valid'] == True).squeeze(), as_tuple=False).squeeze()
+           # Changining into as_tuple=True for single element prediction
+           #action_ind = torch.nonzero((group_comb['valid'] == True).squeeze(), as_tuple=False).squeeze()
+           action_ind = torch.nonzero((group_comb['valid'] == True).squeeze(), as_tuple=True)[0].squeeze()
+
            #nil_ind    = torch.nonzero((group_comb['valid'] == False).squeeze(), as_tuple=False).squeeze()
 
            action_ind_ids = group_comb['ids'].index_select(0, action_ind)
@@ -371,7 +356,6 @@ class Predict():
         return x1
 
     def get_embedding(self, group):
-        #IPython.embed(); exit(1)
         group = self.move_to(group, self.device)
         x = self.forward_one_arm(group)
         output_vector = x.detach()
@@ -466,6 +450,7 @@ class Predict():
         for i, local_batch in enumerate(tqdm(self.training_generator)) :
             #IPython.embed(); exit(1)
             sample_embedding = self.get_embedding(local_batch)
+            #IPython.embed(); exit(1) 
             
             if method == 'max' :
               arr, max_val = self.compute(sample_embedding)
@@ -494,7 +479,6 @@ class Predict():
            #all_labels = [self.df_index[l.astype(int)] for l in list(np.reshape(labels, (-1, num_classes)))]
            #IPython.embed(); exit(1)
            vfunc = np.vectorize(lambda t: self.df_index[t])
-           #vfunc(x)
 
            return (
                    #np.reshape(labels.astype(int), (-1, num_classes)), 

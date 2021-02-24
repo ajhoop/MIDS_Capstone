@@ -57,7 +57,7 @@ for g, d in tqdm(hs.groupby(['htsno1'])) :
     #print(feature_set)
     wc = list(map(lambda x : len(x.split()), feature_set))
     collect_dict_df.append({'hs': g , 'desc': feature_set, 'max_count' : max(wc), 'num_embeddings' : len(wc)})
-    train_dict.append({'label' : g, 'text' : g})
+    train_dict.append({'hs' : str(g), 'desc' : " ".join(feature_set)})
     collect_dict[g] = feature_set
     
 print('Write file : ', config['hts_map_pkl'])
