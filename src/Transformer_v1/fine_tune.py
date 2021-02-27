@@ -330,7 +330,7 @@ class LitClassifier(pl.LightningModule):
     def configure_optimizers(self):
         self.opt = AdamW(self.parameters())
 
-        lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.opt, patience=10, factor=0.5, verbose=True)
+        lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.opt, patience=30, factor=0.5, verbose=True)
 
         scheduler = {
             'scheduler': lr_scheduler,
@@ -403,7 +403,7 @@ def cli_main():
       default_root_dir = config['pl_root_dir'],
       checkpoint_callback=False,
       gpus = (1 if torch.cuda.is_available() else 0),
-      max_epochs = 100,
+      max_epochs = 200,
       reload_dataloaders_every_epoch = True,
       logger = wandb_logger,
     )

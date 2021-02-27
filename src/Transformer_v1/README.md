@@ -64,3 +64,11 @@ All common functions used by different stages are packaged here
 ```
 % ./do_inference.py
 ```
+
+### (Step6) Deploy
+- Loads up trained model
+- Deploy the model for testing
+
+```
+bokeh serve deploy.ipynb   --allow-websocket-origin=192.168.0.191:5007 --port 5007
+```

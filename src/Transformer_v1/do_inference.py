@@ -8,6 +8,8 @@ import TransformerModel
 import json
 import re
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
 
 print("Using configuration file : config.json")
 config = json.loads(re.sub(r'#.*?\n', '', open('config.json', 'r').read()))
@@ -23,10 +25,13 @@ prob = predict.do_inference(method = 'prob')
 df_val['first'], df_val['second'], df_val['third']  = list(prob[0][:,0]), list(prob[0][:,1]), list(prob[0][:,2])
 print('Accuracy : first (probablity)', accuracy_score(df_val['label'], df_val['first']))
 print('Accuracy : first + second ', accuracy_score(df_val['label'], df_val['first']) + accuracy_score(df_val['label'], df_val['second']))
-print('Accuracy : first + second + third ', (accuracy_score(df_val['label'], df_val['first']) + 
-                                             accuracy_score(df_val['label'], df_val['second']) +
-                                             accuracy_score(df_val['label'], df_val['third']))
-     )
+#print('Accuracy : first + second + third ', (accuracy_score(df_val['label'], df_val['first']) + 
+#                                             accuracy_score(df_val['label'], df_val['second']) +
+#                                             accuracy_score(df_val['label'], df_val['third']))
+#     )
+
+print('RECALL : ', recall_score(df_val['label'], df_val['first'], average='weighted'))
+print('PRECISION : ', precision_score(df_val['label'], df_val['first'], average='weighted'))
 
 print("\n>>> Confusion Matrix : \n")
 y_true = list(df_val['label'])

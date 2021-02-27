@@ -257,7 +257,7 @@ def cli_main():
       default_root_dir = config['pl_root_dir'],
       checkpoint_callback=False,
       gpus = (1 if torch.cuda.is_available() else 0),
-      max_epochs = 1,
+      max_epochs = 2,
       reload_dataloaders_every_epoch = True,
       logger = wandb_logger,
     )

@@ -7,12 +7,19 @@
    "rf_project"          : "cap_0218_v3",
    "rf_group"            : "capstone",
 
-   "training_objs"       : [
-                            "/scratch/models/cap_0218_v1/data/product_desc_2019.pkl", 
-                            "/scratch/models/cap_0218_v1/data/product_desc_mdb_2019.pkl",
-                            "/scratch/models/cap_0218_v1/data/nacis.pkl",
-                            "/scratch/models/cap_0218_v1/data/import_manual.pkl"
-                           ],
+   "training_objs_tok"       : [
+                                 "/scratch/models/data/product_desc_2019_new.pkl", # new 2019 product discription
+                                 "/scratch/models/data/mdb_customs_desc.pkl" # Manifest db stuff
+                               ],
+
+   "training_objs_lm"       : [
+                                 "/scratch/models/data/annotations.pkl", # Annotations
+                                 "/scratch/models/data/hts_code.pkl",  # HTS code
+                                 "/scratch/models/data/import_manual.pkl", # manual
+                                 "/scratch/models/data/nacis.pkl",  # NAICS manual
+                                 "/scratch/models/data/naics_conversion.pkl" # Conversion
+                              ],
+
    "training_file"       : "/scratch/models/cap_0218_v3/train.txt",
 
    "padding_length"      : "32",
@@ -20,8 +27,10 @@
    "training_data_pkl"   : "/scratch/models/cap_0218_v3/training_data.pkl",
 
    "train_csv"           : "csv/cap_0218_v3_train.csv",
-   "test_csv"            : "csv/cap_0218_v3_test_strip_hts.csv",
+   "test_csv"            : "csv/cap_0218_v3_test.csv",
+
    "hts_map"             : "HS_extract/hts_train.csv",
+   "conversion_data"     : "NACIS_examples/commodity_hts_extract.csv",
 
    "pl_root_dir"         : "/scratch/models/cap_0218_v3/logs",
    "lm_save_file"        : "/scratch/models/cap_0218_v3/cap_0218_v3_lm.ckpt",
