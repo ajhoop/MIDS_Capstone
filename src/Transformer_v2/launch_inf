@@ -1,0 +1,8 @@
+docker run -u root  --rm -it \
+-v $PWD:/home/model-server/work \
+pytorch/torchserve  \
+"pip3 install tokenizers && cp work/hts.mar model-store/; torchserve --start --model-store model-store --models hts=hts.mar --foreground ;exit"
+
+
+curl -d "data='orange juice'" http://192.168.0.191:8080/v1/models/hts:predict
+curl -i -X POST -H "Content-Type: application/json"  -d '{"data" : "orange juice"}'  http://192.168.0.191:8080/v1/models/hts:predict

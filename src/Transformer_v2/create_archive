@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# https://github.com/pytorch/serve/tree/master/examples/image_classifier/mnist
+# https://github.com/pytorch/serve/blob/master/examples/text_to_speech_synthesizer/create_mar.py
+
+# cd ~/WORK/MachineLearning/Capstone/GPU/transformer1/GIT/MIDS_Capstone/src/Transformer_v2
+# docker run -u root  --rm -it -v $PWD:/home/model-server/work pytorch/torchserve "cd work ; ./create_archive  ;exit"
+
+cp data/1000/transformer_quant.pt  . && \
+cp data/1000/tokenizer.json  . && \
+cp data/1000/index_to_name.pkl . && \
+torch-model-archiver \
+--model-name hts \
+--version 1.0 \
+--serialized-file transformer_quant.pt \
+--handler  ./model_handler.py \
+--extra-files index_to_name.pkl,tokenizer.json --force && \
+rm transformer_quant.pt && rm tokenizer.json && rm index_to_name.pkl && \
+echo "Created hts.mar"
