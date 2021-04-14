@@ -27,5 +27,34 @@
 - `Commodity_hts_extract.csv` - This is the auxiliary dataset provided by Government dataset. This is used as an add on to training.
 
 
+## Tools needed.
+
+Standard datascience tools - `pandas`, `numpy`, `nltk` and associated `nltk` packages.  For visualization `holoviews` need to be installed.  The visualization can be run in Jupyter notebook.
+
+## Neural Network Training tools 
+
+`pytorch` and `pytorchLightning`. Refer to `pytorch` and `pytorchLightning` documentation for more details
+
+## Hardware
+
+A machine with nVidia GPU (Used RTX2070 here) is needed.  This can be run in AWS or in a local machine with GPU.
+
+## Software
+
+Ubuntu 18.04+ is needed. Stick to LTS versions
+
+## Training time
+
+Around 2 hours. 
+
+## Matrics
+
+All the log information is piped into wandb.ai. The specifics are configured through `config.json`. The graphs are updated live as training proceeds. Refer to wandb.ai documentation for more details
+
+
+
+
+
+
 
 
