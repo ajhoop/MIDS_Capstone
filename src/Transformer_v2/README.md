@@ -74,6 +74,20 @@ All the log information is piped into wandb.ai. The specifics are configured thr
 Open the note book `deploy_transformer_v2.ipynb` and execute the same from a Jupyter/JupterLab environment. This will enable the user to input the prediction and see the predicted results. 
 
 
+## output from `wandb.ai`
+
+
+Below are the outputs of the runs in wandb.ai.
+
+
+| Run                                | Link                                             |
+|------------------------------------|--------------------------------------------------|
+| 4137 classes, local GPU            | https://wandb.ai/shajikk/full_1000/runs/11pg25v5 |
+| 4137 classes, AWS                  | https://wandb.ai/shajikk/full_1000/runs/3onw0hrx |
+| 5386 classes, local machine        | https://wandb.ai/shajikk/full_1000/runs/2he7od4j |
+| 209 classes (medium) local machine | https://wandb.ai/shajikk/full_1000/runs/336zbq6c |
+| 10 classes (small) local machine   | https://wandb.ai/shajikk/full_1000/runs/3kb6ys8x |
+
 
 
 
