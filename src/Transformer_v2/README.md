@@ -78,6 +78,7 @@ Open the note book `deploy_transformer_v2.ipynb` and execute the same from a Jup
 
 
 Below are the outputs of the runs in wandb.ai.
+Please visit the link to obtain detailed infromation about the various matrics recorded for the runs and other criteria like learning rates, number of epochs etc. Use the `Overview` link associated with the each run for getting more information.
 
 
 | Run                                | Link                                             |
