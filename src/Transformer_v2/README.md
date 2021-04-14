@@ -89,6 +89,11 @@ Please visit the link to obtain detailed infromation about the various matrics r
 | 209 classes (medium) local machine | https://wandb.ai/shajikk/full_1000/runs/336zbq6c |
 | 10 classes (small) local machine   | https://wandb.ai/shajikk/full_1000/runs/3kb6ys8x |
 
+## Overview diagram
+
+The **Red** part in the diagram corresponds to the process descibed above
+
+![alt text](https://raw.githubusercontent.com/ajhoop/MIDS_Capstone/master/src/Transformer_v2/fig.png)
 
 
 
