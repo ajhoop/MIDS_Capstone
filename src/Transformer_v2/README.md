@@ -51,6 +51,26 @@ Around 2 hours.
 
 All the log information is piped into wandb.ai. The specifics are configured through `config.json`. The graphs are updated live as training proceeds. Refer to wandb.ai documentation for more details
 
+## Steps
+
+```bash
+# This will populate the data directory with all required files for training
+% ./prepare.py
+
+# This will train the network. The weights will be stored in the data directory
+% ./train.py
+
+# This will trigger the quantization process.
+% ./quantize.py
+
+# Will create the archieve for deployment testing
+% ./create_archive
+
+# This will deploy the model
+% ./launch_inf
+
+```
+
 
 
 
