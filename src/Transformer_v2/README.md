@@ -71,7 +71,7 @@ All the log information is piped into wandb.ai. The specifics are configured thr
 
 ```
 
-
+Open the note book `deploy_transformer_v2.ipynb` and execute the same from a Jupyter/JupterLab environment. This will enable the user to input the prediction and see the predicted results. 
 
 
 
