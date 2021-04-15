@@ -1,6 +1,6 @@
-# Data Science Project GitHub Repo Template
+# mPowerSmallBiz
 
-This repo provides a template structure for Python-based data science projects. It includes commonly used directories, including `notebooks/`, `data/`, and `src/` directories, and files for efficient setup of the src code and conda environment. Feel free to customize the directory for your usage!
+This repo contains the working files for the UC Berkeley Master of Information and Data Science (MIDS) Capstone (W210) project. The team developing this project is Ammara Essa, Andy Hoopengardner, Shaji Kunjumohamed, and Padma Sridhar.
 
 ## Initial Setup
 
