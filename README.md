@@ -13,39 +13,16 @@ The mPowerSmallBiz marketplace is powered by a specialized search engine trained
 
 Once a product description has been matched to an HS Code, the mPowerSmallBiz marketplace can identify US businesses that have imported similar items based on our dataset of over 12M US Customs import records from 2019. The marketplace can also identify US small businesses capable of producing similar items by matching the HS Code to a North American Industry Classification System (NAICS) Code and then to US businesses that received PPP loans. These results are returned via an interactive interface that enables the user to explore and identify new leads, whether they are buying or selling.
 
-## Setting up the src code and customizing the conda environment
+## Repo Organization
 
-The conda environment in `environment.yml` is a starter environment, only for setting up the repo. I include instructions for renaming and customizing the conda environment after the initial installation is complete. Use the following steps to complete the installation of the environment and make code stored in src available as a package.
+This github repo has three main areas:
 
-After cloning the repo, navigate into the repo and run:
+* Data
+* Notebooks
+* SRC
 
-```
-# create the conda environment
-conda env create -f environment.yml
+### Data
 
-# activate the conda environment
-conda activate initial-env
-```
+This project uses
 
-Then, to make a copy of the initial-env conda environment and rename it to whatever you want to use as your custom environment name, use the following, replacing `custom-env` with your preferred name.
 
-```
-# first make a copy of initial-env 
-# (can use the flag --offline if you don't want to redownload packages)
-conda create --name custom-env --clone initial-env
-
-# second, delete initial-env
-conda remove --name initial-env --all
-```
-
-Now you have your own custom conda environment. I suggest running the following lines to make your environment available to Jupyter as a kernel and export your new environment to the `environment.yml` file (remember to rerun the latter as you add more libraries to your environment).
-
-```
-# make this conda environment available as a kernel in jupyter
-python -m ipykernel install --user --name custom-env --display-name "custom-env"
-
-# export environment.yml file
-conda env export > environment.yml
-```
-
-If you for some reason you already have a conda environment you want to use with this repo, all you'll need to do is navigate into the repo, activate your environment, and then run `pip install -e .` to set up the src folder.
