@@ -1,6 +1,6 @@
 # mPowerSmallBiz
 
-This repo contains the working files for the UC Berkeley Master of Information and Data Science (MIDS) Capstone (W210) project. The team developing this project is Ammara Essa, Andy Hoopengardner, Shaji Kunjumohamed, and Padma Sridhar.
+This repo contains the working files for the UC Berkeley Master of Information and Data Science (MIDS) Capstone (W210) project. The team developing this project is Ammara Essa, Andy Hoopengardner, Shaji Kunjumohamed, and Padma Sridhar. The final presentation for this course is included in this repo.
 
 ## Overview
 
