@@ -23,6 +23,14 @@ This github repo has three main areas:
 
 ### Data
 
-This project uses
+The data portion of the repo describes each of the datasets used, which include a combination of publicly available, government, and commercially procured datasets. The datasets were stored in an Amazon S3 bucket for the duration of this project and are not re-produced in this repo. Where possible, we provide links to the sites from which the datasets were downloaded.
+
+### Notebooks
+
+This section of the repo contains the various notebooks the team used to perform EDA and model development. During the project, each team member worked independently and shared code as needed.
+
+### SRC
+
+This section of the repo contains our final model.
 
 
