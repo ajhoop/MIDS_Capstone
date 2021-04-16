@@ -13,6 +13,8 @@ The mPowerSmallBiz marketplace is powered by a specialized search engine trained
 
 Once a product description has been matched to an HS Code, the mPowerSmallBiz marketplace can identify US businesses that have imported similar items based on our dataset of over 12M US Customs import records from 2019. The marketplace can also identify US small businesses capable of producing similar items by matching the HS Code to a North American Industry Classification System (NAICS) Code and then to US businesses that received PPP loans. These results are returned via an interactive interface that enables the user to explore and identify new leads, whether they are buying or selling.
 
+The MVP website is available here: http://mpowersmallbiz.com
+
 ## Repo Organization
 
 This github repo has three main areas:
