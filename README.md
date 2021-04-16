@@ -27,7 +27,7 @@ The data portion of the repo describes each of the datasets used, which include 
 
 ### Notebooks
 
-This section of the repo contains the various notebooks the team used to perform EDA and model development. During the project, each team member worked independently and shared code as needed.
+This section of the repo contains the various notebooks the team used to perform EDA and model development. During the project, each team member worked independently and shared code as needed. The "Dataprep" directory contains the code used to create the various samples used to test different models, as well as to perform some basic data preparation and de-duplication.
 
 ### SRC
 
