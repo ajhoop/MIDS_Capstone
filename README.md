@@ -36,7 +36,8 @@ This section of the repo contains the various notebooks the team used to perform
 This section of the repo contains our final model.
 
 ## Tools
-
-<div style="text-align:center"><img src="/images/tools.PNG" /></div>
+<p align="center">
+  <img width="460" height="300" src="/images/tools.PNG">
+</p>
 
 
