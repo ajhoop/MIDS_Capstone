@@ -37,7 +37,7 @@ This section of the repo contains our final model.
 
 ## Tools
 <p align="center">
-  <img width="460" height="300" src="/images/tools.PNG">
+  <img src="/images/tools.PNG">
 </p>
 
 
