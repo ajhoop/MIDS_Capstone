@@ -35,4 +35,8 @@ This section of the repo contains the various notebooks the team used to perform
 
 This section of the repo contains our final model.
 
+## Tools
+
+![Image of Tools](/images/tools.PNG)
+
 
